@@ -27,7 +27,7 @@ library
     filepath,
     iteratee,
     split,
-    BiobaseVienna,
+    BiobaseTurner >= 0.1,
     BiobaseXNA,
     PrimitiveArray
   exposed-modules:
@@ -39,6 +39,7 @@ library
 
 executable ViennaConverter
   build-depends:
+    cmdargs == 0.8.*
   main-is:
     ViennaConverter.hs
   ghc-options:
