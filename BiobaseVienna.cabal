@@ -28,7 +28,7 @@ library
     iteratee,
     split,
     BiobaseTurner >= 0.1,
-    BiobaseXNA,
+    BiobaseXNA >= 0.5.1,
     PrimitiveArray
   exposed-modules:
     Biobase.Vienna

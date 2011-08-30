@@ -8,13 +8,20 @@
 
 module Biobase.Vienna where
 
+import Data.ByteString (ByteString)
+import Data.Map (Map)
+
+import Data.PrimitiveArray
+import Biobase.Primary
+import Biobase.Secondary.Vienna
+
 data Vienna2004 = Vienna2004
   { stack :: PrimArray (ViennaPair,ViennaPair) Int
   , dangle3 :: PrimArray PN Int
   , dangle5 :: PrimArray PN Int
   , hairpinL :: PrimArray Int Int
   , hairpinMM :: PrimArray PNN Int
-  , hairpinLookup :: M.Map ByteString Int
+  , hairpinLookup :: Map ByteString Int
   , hairpinGGG :: Int
   , hairpinCslope :: Int
   , hairpinCintercept :: Int
@@ -43,7 +50,7 @@ data Vienna2004 = Vienna2004
   , largeLoop :: Int
   , termAU :: Int
   , intermolecularInit :: Int
-  } deriving (Read,Show)
+  } -- deriving (Read,Show)
 
 type PNN = (ViennaPair,Nuc,Nuc)
 type PN  = (ViennaPair,Nuc)
