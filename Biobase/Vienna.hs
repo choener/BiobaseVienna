@@ -21,7 +21,7 @@ data Vienna2004 = Vienna2004
   , dangle5 :: PrimArray PN Int
   , hairpinL :: PrimArray Int Int
   , hairpinMM :: PrimArray PNN Int
-  , hairpinLookup :: Map ByteString Int
+  , hairpinLookup :: Map [Nuc] Int
   , hairpinGGG :: Int
   , hairpinCslope :: Int
   , hairpinCintercept :: Int
