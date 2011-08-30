@@ -11,6 +11,7 @@ import Text.Printf
 import Biobase.Primary
 import Biobase.Secondary.Vienna
 import Data.PrimitiveArray
+import Data.PrimitiveArray.Ix
 
 import Biobase.Vienna
 

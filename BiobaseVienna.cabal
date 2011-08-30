@@ -27,7 +27,7 @@ library
     filepath,
     iteratee,
     split,
-    BiobaseTurner >= 0.1,
+    BiobaseTurner >= 0.1.1,
     BiobaseXNA >= 0.5.1,
     PrimitiveArray
   exposed-modules:
