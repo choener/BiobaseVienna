@@ -31,7 +31,7 @@ library
     BiobaseXNA >= 0.6,
     vector >= 0.9,
     repa >= 2.0,
-    PrimitiveArray >= 0.1
+    PrimitiveArray >= 0.1.1.1
   exposed-modules:
     Biobase.Vienna
     Biobase.Vienna.Export
@@ -46,3 +46,9 @@ executable ViennaConverter
     ViennaConverter.hs
   ghc-options:
     -O2
+
+source-repository head
+  type: git
+  location: git://github.com/choener/BiobaseVienna
+
+
