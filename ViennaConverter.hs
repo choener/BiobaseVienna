@@ -13,15 +13,6 @@ import Biobase.Turner.Import
 import Biobase.Vienna.Export
 import Biobase.Vienna.Import
 
-{-
-import Biobase.Primary
-import Biobase.Secondary
-import Biobase.Secondary.Vienna
-import Data.PrimitiveArray
-import Data.PrimitiveArray.Ix
-import Biobase.Vienna
--}
-
 
 
 data Options = Options

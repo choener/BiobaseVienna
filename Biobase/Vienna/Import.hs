@@ -11,8 +11,10 @@
 module Biobase.Vienna.Import where
 
 import Control.Arrow
-import qualified Data.Map as M
+import Data.Array.Repa.Index
+import Data.Array.Repa.Shape
 import qualified Data.ByteString.Char8 as BS
+import qualified Data.Map as M
 
 import Biobase.Primary
 import Biobase.Secondary
@@ -33,14 +35,14 @@ fromTurner2004 turner = Vienna2004
   { stack = convert minPP maxPP $ T.stack turner
   , dangle3 = convert minPB maxPB $ T.dangle3 turner
   , dangle5 = convert minPB maxPB $ T.dangle5 turner
-  , hairpinL = convert 0 30 $ T.hairpinL turner
+  , hairpinL = convert (Z:.0) (Z:.30) $ T.hairpinL turner
   , hairpinMM = convert minPBB maxPBB $ T.hairpinMM turner
   , hairpinLookup = M.mapKeys (read . BS.unpack) . M.map deka $ T.hairpinLookup turner
   , hairpinGGG = deka $ T.hairpinGGG turner
   , hairpinCslope = deka $ T.hairpinCslope turner
   , hairpinCintercept = deka $ T.hairpinCintercept turner
   , hairpinC3 = deka $ T.hairpinC3 turner
-  , bulgeL = convert 0 30 $ T.bulgeL turner
+  , bulgeL = convert (Z:.0) (Z:.30) $ T.bulgeL turner
   , bulgeSingleC = deka $ T.bulgeSingleC turner
   , iloop1x1 = convert minPPBB maxPPBB $ T.iloop1x1 turner
   , iloop2x1 = convert minPPBBB maxPPBBB $ T.iloop2x1 turner
@@ -48,7 +50,7 @@ fromTurner2004 turner = Vienna2004
   , iloopMM = convert minPBB maxPBB $ T.iloopMM turner
   , iloop2x3MM = convert minPBB maxPBB $ T.iloop2x3MM turner
   , iloop1xnMM = convert minPBB maxPBB $ T.iloop1xnMM turner
-  , iloopL = convert 0 30 $ T.iloopL turner
+  , iloopL = convert (Z:.0) (Z:.30) $ T.iloopL turner
   , multiMM = convert minPBB maxPBB $ T.multiMM turner
   , ninio = deka $ T.ninio turner
   , maxNinio = deka $ T.maxNinio turner
@@ -73,23 +75,28 @@ fromTurner2004 turner = Vienna2004
 class IdxConvert a b where
   idxConvert :: a -> b
 
-instance IdxConvert Pair ViennaPair where
-  idxConvert = mkViennaPair
-
-instance IdxConvert Nuc Nuc where
+instance IdxConvert DIM1 DIM1 where
   idxConvert = id
 
-instance IdxConvert Int Int where
-  idxConvert = id
+instance IdxConvert T.PNN PNN where
+  idxConvert (Z:.p1:.p2:.n1:.n2) = Z:. mkViennaPair (p1,p2) :.n1:.n2
 
-instance (IdxConvert a c, IdxConvert b d) => IdxConvert (a,b) (c,d) where
-  idxConvert = idxConvert *** idxConvert
+instance IdxConvert T.PN PN where
+  idxConvert (Z:.p1:.p2:.n1) = Z:. mkViennaPair (p1,p2) :.n1
 
-instance (IdxConvert a d, IdxConvert b e, IdxConvert c f) => IdxConvert (a,b,c) (d,e,f) where
-  idxConvert (a,b,c) = (idxConvert a, idxConvert b, idxConvert c)
+instance IdxConvert T.PPNNNN PPNNNN where
+  idxConvert (Z:.p11:.p12:.p21:.p22:.n1:.n2:.n3:.n4) = Z:. mkViennaPair (p11,p12) :. mkViennaPair (p21,p22) :.n1:.n2:.n3:.n4
 
-instance (IdxConvert al ar, IdxConvert bl br, IdxConvert cl cr, IdxConvert dl dr) => IdxConvert (al,bl,cl,dl) (ar,br,cr,dr) where
-  idxConvert (a,b,c,d) = (idxConvert a, idxConvert b, idxConvert c, idxConvert d)
+instance IdxConvert T.PPNNN PPNNN where
+  idxConvert (Z:.p11:.p12:.p21:.p22:.n1:.n2:.n3) = Z:. mkViennaPair (p11,p12) :. mkViennaPair (p21,p22) :.n1:.n2:.n3
+
+instance IdxConvert T.PPNN PPNN where
+  idxConvert (Z:.p11:.p12:.p21:.p22:.n1:.n2) = Z:. mkViennaPair (p11,p12) :. mkViennaPair (p21,p22) :.n1:.n2
+
+instance IdxConvert T.PP PP where
+  idxConvert (Z:.p11:.p12:.p21:.p22) = Z:. mkViennaPair (p11,p12) :. mkViennaPair (p21,p22)
+
+
 
 -- | Transform energies to the vienna Int-based variant
 --
@@ -97,18 +104,18 @@ instance (IdxConvert al ar, IdxConvert bl br, IdxConvert cl cr, IdxConvert dl dr
 
 deka = round . (*100)
 
-minP = minBound
-maxP = maxBound
-minPB = (minP,nN)
-maxPB = (maxP,nU)
-minPP = (minP,minP)
-maxPP = (maxP,maxP)
-minPBB = (minP,nN,nN)
-maxPBB = (maxP,nU,nU)
-minPPBB = (minP,minP,(nN,nN))
-maxPPBB = (maxP,maxP,(nU,nU))
-minPPBBB = (minP,minP,(nN,nN,nN))
-maxPPBBB = (maxP,maxP,(nU,nU,nU))
-minPPBBBB = (minP,minP,(nN,nN,nN,nN))
-maxPPBBBB = (maxP,maxP,(nU,nU,nU,nU))
+minP = Z:.vpNP -- minBound
+maxP = Z:.vpNS -- maxBound
+minPB = minP:.nN -- (minP,nN)
+maxPB = maxP:.nU -- (maxP,nU)
+minPP = minP:.vpNP -- (minP,minP)
+maxPP = maxP:.vpNS -- (maxP,maxP)
+minPBB = minP:.nN:.nN -- (minP,nN,nN)
+maxPBB = maxP:.nU:.nU -- (maxP,nU,nU)
+minPPBB = minPP:.nN:.nN -- (minP,minP,(nN,nN))
+maxPPBB = maxPP:.nU:.nU -- (maxP,maxP,(nU,nU))
+minPPBBB = minPPBB:.nN -- (minP,minP,(nN,nN,nN))
+maxPPBBB = maxPPBB:.nU -- (maxP,maxP,(nU,nU,nU))
+minPPBBBB = minPPBBB:.nN -- (minP,minP,(nN,nN,nN,nN))
+maxPPBBBB = maxPPBBB:.nU -- (maxP,maxP,(nU,nU,nU,nU))
 

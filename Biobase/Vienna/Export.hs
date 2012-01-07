@@ -3,6 +3,8 @@
 module Biobase.Vienna.Export where
 
 import Control.Arrow
+import Data.Array.Repa.Index
+import Data.Array.Repa.Shape
 import Data.List (intersperse)
 import Data.List.Split
 import qualified Data.Map as M
@@ -11,7 +13,7 @@ import Text.Printf
 import Biobase.Primary
 import Biobase.Secondary.Vienna
 import Data.PrimitiveArray
-import Data.PrimitiveArray.Ix
+import Data.PrimitiveArray.Unboxed
 
 import Biobase.Vienna
 
@@ -87,12 +89,12 @@ showKey xs =
 
 type LKey = ([ViennaPair],[Nuc])
 
-pb2lkey (p1,b1) = ([p1],[b1])
-pbb2lkey (p1,b1,b2) = ([p1],[b1,b2])
-pp2lkey (k1,k2) = ([k1,k2],[])
-ppbb2lkey (p1,p2,(b1,b2)) = ([p1,p2],[b1,b2])
-ppbbb2lkey (p1,p2,(b1,b2,b3)) = ([p1,p2],[b1,b2,b3])
-ppbbbb2lkey (p1,p2,(b1,b2,b3,b4)) = ([p1,p2],[b1,b2,b3,b4])
+pb2lkey (Z:.p1:.b1) = ([p1],[b1])
+pbb2lkey (Z:.p1:.b1:.b2) = ([p1],[b1,b2])
+pp2lkey (Z:.k1:.k2) = ([k1,k2],[])
+ppbb2lkey (Z:.p1:.p2:.b1:.b2) = ([p1,p2],[b1,b2])
+ppbbb2lkey (Z:.p1:.p2:.b1:.b2:.b3) = ([p1,p2],[b1,b2,b3])
+ppbbbb2lkey (Z:.p1:.p2:.b1:.b2:.b3:.b4) = ([p1,p2],[b1,b2,b3,b4])
 
 -- | Print a block.
 
