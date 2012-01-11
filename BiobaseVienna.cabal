@@ -1,5 +1,5 @@
 name:           BiobaseVienna
-version:        0.2.0.0
+version:        0.2.1.0
 author:         Christian Hoener zu Siederdissen
 maintainer:     choener@tbi.univie.ac.at
 homepage:       http://www.tbi.univie.ac.at/~choener/
@@ -25,6 +25,7 @@ library
     bytestring-lexing,
     containers,
     filepath,
+    file-embed,
     iteratee,
     split,
     BiobaseTurner >= 0.2,
@@ -36,6 +37,7 @@ library
     Biobase.Vienna
     Biobase.Vienna.Export
     Biobase.Vienna.Import
+    Biobase.Vienna.ImportPar
   ghc-options:
     -Odph -funbox-strict-fields -fspec-constr
 
