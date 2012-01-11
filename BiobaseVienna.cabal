@@ -1,5 +1,5 @@
 name:           BiobaseVienna
-version:        0.2.1.0
+version:        0.2.1.1
 author:         Christian Hoener zu Siederdissen
 maintainer:     choener@tbi.univie.ac.at
 homepage:       http://www.tbi.univie.ac.at/~choener/
@@ -18,6 +18,9 @@ description:
                 This is the 2011 post-library split version, hence not
                 deprecated anymore.
 
+extra-source-files:
+  parfiles/rna_turner2004.par
+
 library
   build-depends:
     base >3 && <5,
@@ -35,6 +38,7 @@ library
     PrimitiveArray >= 0.1.1.2
   exposed-modules:
     Biobase.Vienna
+    Biobase.Vienna.Default
     Biobase.Vienna.Export
     Biobase.Vienna.Import
     Biobase.Vienna.ImportPar

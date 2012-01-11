@@ -15,7 +15,7 @@ import Biobase.Vienna.ImportPar
 -- |
 
 turnerRNA2004 :: (Vienna2004,Vienna2004)
-turnerRNA2004 = undefined
+turnerRNA2004 = fromByteString rnaTurner2004par
 
 -- | embedded parameter file for Turner2004 parameters
 

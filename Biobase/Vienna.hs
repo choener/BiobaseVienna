@@ -32,7 +32,7 @@ data Vienna2004 = Vienna2004
   , dangle5 :: PrimArray PN Int
   , hairpinL :: PrimArray DIM1 Int
   , hairpinMM :: PrimArray PNN Int
-  , hairpinLookup :: Map [Nuc] Int
+  , hairpinLookup :: Map Primary Int
   , hairpinGGG :: Int
   , hairpinCslope :: Int
   , hairpinCintercept :: Int
@@ -61,5 +61,5 @@ data Vienna2004 = Vienna2004
   , largeLoop :: Int
   , termAU :: Int
   , intermolecularInit :: Int
-  } -- deriving (Read,Show)
+  } deriving (Show) -- deriving (Read,Show)
 
