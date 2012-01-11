@@ -31,13 +31,13 @@ library
     BiobaseXNA >= 0.6,
     vector >= 0.9,
     repa >= 2.0,
-    PrimitiveArray >= 0.1.1.1
+    PrimitiveArray >= 0.1.1.2
   exposed-modules:
     Biobase.Vienna
     Biobase.Vienna.Export
     Biobase.Vienna.Import
   ghc-options:
-    -O2
+    -Odph -funbox-strict-fields -fspec-constr
 
 executable ViennaConverter
   build-depends:
