@@ -136,6 +136,6 @@ printHairpinAssocs l trnr trnrH = res where
   res = concat $ zipWith (\(k,v) vH -> printf "%s %7d %7d\n" (concatMap show k) v vH) xs ys
   xs = filter ((==l).length.fst) $ map (\(k,v) -> (mkString k,v)) $ M.assocs $ hairpinLookup trnr
   ys = map snd $ filter ((==l).length.fst) $ map (\(k,v) -> (mkString k,v)) $ M.assocs $ hairpinLookup trnrH
-  mkString = let convT x = if x =='T' then 'U' else x in map (convT . fromNuc) . VU.toList
+  mkString = let convT x = if x =='T' then 'U' else x in map (convT . fromNuc) . toList
 
 printLinearH s = printLinear (s ++ "_enthalpies")
