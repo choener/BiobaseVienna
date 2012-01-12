@@ -61,5 +61,5 @@ data Vienna2004 = Vienna2004
   , largeLoop :: Int
   , termAU :: Int
   , intermolecularInit :: Int
-  } deriving (Show) -- deriving (Read,Show)
+  } -- deriving (Read,Show)
 

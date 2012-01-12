@@ -9,11 +9,12 @@ import Data.List (intersperse)
 import Data.List.Split
 import qualified Data.Map as M
 import Text.Printf
+import qualified Data.Vector.Unboxed as VU
 
 import Biobase.Primary
 import Biobase.Secondary.Vienna
 import Data.PrimitiveArray
-import Data.PrimitiveArray.Unboxed
+import Data.PrimitiveArray.Unboxed.Zero
 
 import Biobase.Vienna
 
@@ -133,7 +134,8 @@ printLinear s k xs' = let xs = assocs xs' in
 
 printHairpinAssocs l trnr trnrH = res where
   res = concat $ zipWith (\(k,v) vH -> printf "%s %7d %7d\n" (concatMap show k) v vH) xs ys
-  xs = filter ((==l).length.fst) $ M.assocs $ hairpinLookup trnr
-  ys = map snd $ filter ((==l).length.fst) $ M.assocs $ hairpinLookup trnrH
+  xs = filter ((==l).length.fst) $ map (\(k,v) -> (mkString k,v)) $ M.assocs $ hairpinLookup trnr
+  ys = map snd $ filter ((==l).length.fst) $ map (\(k,v) -> (mkString k,v)) $ M.assocs $ hairpinLookup trnrH
+  mkString = let convT x = if x =='T' then 'U' else x in map (convT . fromNuc) . VU.toList
 
 printLinearH s = printLinear (s ++ "_enthalpies")

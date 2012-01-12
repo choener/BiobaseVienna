@@ -30,6 +30,7 @@ library
     filepath,
     file-embed,
     iteratee,
+    mtl,
     split,
     BiobaseTurner >= 0.2,
     BiobaseXNA >= 0.6,

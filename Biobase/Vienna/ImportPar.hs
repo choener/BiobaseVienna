@@ -17,7 +17,7 @@ import qualified Data.Map as M
 import Control.Monad.Identity
 
 import Data.PrimitiveArray
-import Data.PrimitiveArray.Unboxed
+import Data.PrimitiveArray.Unboxed.Zero
 import Biobase.Secondary.Vienna
 import Biobase.Primary
 
