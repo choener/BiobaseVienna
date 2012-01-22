@@ -15,6 +15,7 @@ import Data.ByteString (ByteString)
 import Data.Map (Map)
 
 import Data.PrimitiveArray
+import Data.PrimitiveArray.Unboxed.Zero
 import Biobase.Primary
 import Biobase.Secondary.Vienna
 
@@ -27,26 +28,26 @@ type PPNNN = PPNN:.Nuc
 type PPNNNN = PPNNN:.Nuc
 
 data Vienna2004 = Vienna2004
-  { stack :: PrimArray PP Int
-  , dangle3 :: PrimArray PN Int
-  , dangle5 :: PrimArray PN Int
-  , hairpinL :: PrimArray DIM1 Int
-  , hairpinMM :: PrimArray PNN Int
+  { stack :: Arr0 PP Int
+  , dangle3 :: Arr0 PN Int
+  , dangle5 :: Arr0 PN Int
+  , hairpinL :: Arr0 DIM1 Int
+  , hairpinMM :: Arr0 PNN Int
   , hairpinLookup :: Map Primary Int
   , hairpinGGG :: Int
   , hairpinCslope :: Int
   , hairpinCintercept :: Int
   , hairpinC3 :: Int
-  , bulgeL :: PrimArray DIM1 Int
+  , bulgeL :: Arr0 DIM1 Int
   , bulgeSingleC :: Int
-  , iloop1x1 :: PrimArray PPNN  Int
-  , iloop2x1 :: PrimArray PPNNN Int
-  , iloop2x2 :: PrimArray PPNNNN Int
-  , iloopMM :: PrimArray PNN Int
-  , iloop2x3MM :: PrimArray PNN Int
-  , iloop1xnMM :: PrimArray PNN Int
-  , iloopL :: PrimArray DIM1 Int
-  , multiMM :: PrimArray PNN Int
+  , iloop1x1 :: Arr0 PPNN  Int
+  , iloop2x1 :: Arr0 PPNNN Int
+  , iloop2x2 :: Arr0 PPNNNN Int
+  , iloopMM :: Arr0 PNN Int
+  , iloop2x3MM :: Arr0 PNN Int
+  , iloop1xnMM :: Arr0 PNN Int
+  , iloopL :: Arr0 DIM1 Int
+  , multiMM :: Arr0 PNN Int
   , ninio :: Int
   , maxNinio :: Int
   , multiOffset :: Int
@@ -54,10 +55,10 @@ data Vienna2004 = Vienna2004
   , multiHelix :: Int
   , multiAsym :: Int
   , multiStrain :: Int
-  , extMM :: PrimArray PNN Int
-  , coaxial :: PrimArray PP Int -- no intervening unpaired nucleotides
-  , coaxStack :: PrimArray PNN Int
-  , tStackCoax :: PrimArray PNN Int
+  , extMM :: Arr0 PNN Int
+  , coaxial :: Arr0 PP Int -- no intervening unpaired nucleotides
+  , coaxStack :: Arr0 PNN Int
+  , tStackCoax :: Arr0 PNN Int
   , largeLoop :: Int
   , termAU :: Int
   , intermolecularInit :: Int

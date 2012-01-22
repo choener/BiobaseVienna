@@ -1,5 +1,5 @@
 name:           BiobaseVienna
-version:        0.2.1.1
+version:        0.2.2.0
 author:         Christian Hoener zu Siederdissen
 maintainer:     choener@tbi.univie.ac.at
 homepage:       http://www.tbi.univie.ac.at/~choener/
@@ -32,11 +32,11 @@ library
     iteratee,
     mtl,
     split,
-    BiobaseTurner >= 0.2,
-    BiobaseXNA >= 0.6,
+    BiobaseTurner >= 0.2.2.0,
+    BiobaseXNA >= 0.6.2.0,
     vector >= 0.9,
     repa >= 2.0,
-    PrimitiveArray >= 0.1.1.2
+    PrimitiveArray >= 0.2.0.0
   exposed-modules:
     Biobase.Vienna
     Biobase.Vienna.Default
