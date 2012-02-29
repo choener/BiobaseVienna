@@ -109,7 +109,41 @@ makeStructures bs =
         , intermolecularInit = 999999
         }
       vEnth = Vienna2004
-        {}
+        { stack = blockAssocs minPP maxPP ppKeys   $ lookup "# stack_enthalpies"   bs
+        , dangle3 = blockAssocs minPB maxPB pbKeys $ lookup "# dangle3_enthalpies" bs
+        , dangle5 = blockAssocs minPB maxPB pbKeys $ lookup "# dangle5_enthalpies" bs
+        , hairpinL = blockAssocs (Z:.0) (Z:.30) thirty $ lookup "# hairpin_enthalpies" bs
+        , hairpinMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_hairpin_enthalpies" bs
+        , hairpinLookup = snd $ allLookups bs
+        , hairpinGGG = 999999
+        , hairpinCslope = 999999
+        , hairpinCintercept = 999999
+        , hairpinC3 = 999999
+        , bulgeL = blockAssocs (Z:.0) (Z:.30) thirty $ lookup "# bulge_enthalpies" bs
+        , bulgeSingleC = 999999
+        , iloop1x1 = blockAssocs minPPBB maxPPBB ppbbKeys $ lookup "# int11_enthalpies" bs
+        , iloop2x1 = blockAssocs minPPBBB maxPPBBB ppbbbKeys $ lookup "# int21_enthalpies" bs
+        , iloop2x2 = blockAssocs minPPBBBB maxPPBBBB ppbbbbKeys $ lookup "# int22_enthalpies" bs
+        , iloopMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_interior_enthalpies" bs
+        , iloop2x3MM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_interior_23_enthalpies" bs
+        , iloop1xnMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_interior_1n_enthalpies" bs
+        , iloopL = blockAssocs (Z:.0) (Z:.30) thirty $ lookup "# interior_enthalpies" bs
+        , multiMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_multi_enthalpies" bs
+        , ninio = 999999
+        , maxNinio = 999999
+        , multiOffset = 999999
+        , multiNuc = 999999
+        , multiHelix = 999999
+        , multiAsym = 999999
+        , multiStrain = 999999
+        , extMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_exterior_enthalpies" bs
+        , coaxial = fromAssocs minPP maxPP 999999 []
+        , coaxStack = fromAssocs minPBB maxPBB 999999 []
+        , tStackCoax = fromAssocs minPBB maxPBB 999999 []
+        , largeLoop = 999999
+        , termAU = 999999
+        , intermolecularInit = 999999
+        }
   in (vEner,vEnth)
 
 thirty = P.map (Z:.) [0..30]
