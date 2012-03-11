@@ -15,6 +15,7 @@ import Data.Array.Repa.Index
 import Data.Array.Repa.Shape
 import qualified Data.Map as M
 import Control.Monad.Identity
+import Data.Maybe (fromJust)
 
 import Data.PrimitiveArray
 import Data.PrimitiveArray.Unboxed.Zero
@@ -23,6 +24,8 @@ import Biobase.Primary
 
 import Biobase.Vienna
 import Biobase.Vienna.Import
+
+import Debug.Trace
 
 
 
@@ -93,11 +96,11 @@ makeStructures bs =
         , iloop1xnMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_interior_1n" bs
         , iloopL = blockAssocs (Z:.0) (Z:.30) thirty $ lookup "# interior" bs
         , multiMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_multi" bs
-        , ninio = 999999
-        , maxNinio = 999999
-        , multiOffset = 999999
-        , multiNuc = 999999
-        , multiHelix = 999999
+        , ninio = single 0 $ lookup "# NINIO" bs
+        , maxNinio = single 2 $ lookup "# NINIO" bs
+        , multiOffset = single 2 $ lookup "# ML_params" bs
+        , multiNuc = single 0 $ lookup "# ML_params" bs
+        , multiHelix = single 4 $ lookup "# ML_params" bs
         , multiAsym = 999999
         , multiStrain = 999999
         , extMM = blockAssocs minPBB maxPBB pbbKeys $ lookup "# mismatch_exterior" bs
@@ -105,7 +108,7 @@ makeStructures bs =
         , coaxStack = fromAssocs minPBB maxPBB 999999 []
         , tStackCoax = fromAssocs minPBB maxPBB 999999 []
         , largeLoop = 999999
-        , termAU = 999999
+        , termAU = single 2 $ lookup "# Misc" bs
         , intermolecularInit = 999999
         }
       vEnth = Vienna2004
@@ -146,6 +149,7 @@ makeStructures bs =
         }
   in (vEner,vEnth)
 
+single k (Just (Block xs)) = xs !! k
 thirty = P.map (Z:.) [0..30]
 pbKeys = [ (Z:.x:.y) | x<-cgnsP, y<-nacgu ]
 ppKeys = [ (Z:.x:.y) | x<-cgnsP, y<-cgnsP ]
