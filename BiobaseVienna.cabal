@@ -1,5 +1,5 @@
 name:           BiobaseVienna
-version:        0.2.2.3
+version:        0.2.2.4
 author:         Christian Hoener zu Siederdissen
 maintainer:     choener@tbi.univie.ac.at
 homepage:       http://www.tbi.univie.ac.at/~choener/
@@ -24,18 +24,18 @@ extra-source-files:
 library
   build-depends:
     base >3 && <5,
-    bytestring,
-    bytestring-lexing,
-    containers,
-    filepath,
-    file-embed,
-    iteratee,
-    mtl,
-    split,
-    vector         == 0.9.*   ,
-    BiobaseTurner  == 0.2.2.2 ,
-    BiobaseXNA     == 0.6.2.2 ,
-    PrimitiveArray == 0.2.1.1
+    bytestring        >= 0.9,
+    bytestring-lexing >= 0.4,
+    containers        >= 0.4,
+    file-embed        >= 0.0.4.1,
+    filepath          >= 1,
+    iteratee          >= 0.8.8,
+    mtl               >= 2,
+    split             >= 0.1.4,
+    vector            == 0.9.*   ,
+    BiobaseTurner     == 0.2.2.3 ,
+    BiobaseXNA        == 0.6.2.4 ,
+    PrimitiveArray    == 0.2.1.1
   exposed-modules:
     Biobase.Vienna
     Biobase.Vienna.Default
