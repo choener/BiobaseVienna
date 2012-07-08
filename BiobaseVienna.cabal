@@ -1,5 +1,5 @@
 name:           BiobaseVienna
-version:        0.2.2.4
+version:        0.2.2.5
 author:         Christian Hoener zu Siederdissen
 maintainer:     choener@tbi.univie.ac.at
 homepage:       http://www.tbi.univie.ac.at/~choener/
@@ -18,8 +18,12 @@ description:
                 This is the 2011 post-library split version, hence not
                 deprecated anymore.
 
+
+
 extra-source-files:
   parfiles/rna_turner2004.par
+
+
 
 library
   build-depends:
@@ -33,9 +37,9 @@ library
     mtl               >= 2,
     split             >= 0.1.4,
     vector            == 0.9.*   ,
-    BiobaseTurner     == 0.2.2.3 ,
-    BiobaseXNA        == 0.6.2.4 ,
-    PrimitiveArray    == 0.2.1.1
+    BiobaseTurner     == 0.2.2.4 ,
+    BiobaseXNA        == 0.6.2.5 ,
+    PrimitiveArray    == 0.2.2.0
   exposed-modules:
     Biobase.Vienna
     Biobase.Vienna.Default
@@ -43,7 +47,9 @@ library
     Biobase.Vienna.Import
     Biobase.Vienna.ImportPar
   ghc-options:
-    -Odph -funbox-strict-fields -fspec-constr
+    -O2 -funbox-strict-fields
+
+
 
 executable ViennaConverter
   build-depends:
@@ -51,7 +57,9 @@ executable ViennaConverter
   main-is:
     ViennaConverter.hs
   ghc-options:
-    -O2
+    -O2 -funbox-strict-fields
+
+
 
 source-repository head
   type: git
