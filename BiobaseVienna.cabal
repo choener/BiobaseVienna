@@ -1,5 +1,5 @@
 name:           BiobaseVienna
-version:        0.2.2.5
+version:        0.3.0.0
 author:         Christian Hoener zu Siederdissen
 maintainer:     choener@tbi.univie.ac.at
 homepage:       http://www.tbi.univie.ac.at/~choener/
@@ -28,36 +28,37 @@ extra-source-files:
 library
   build-depends:
     base >3 && <5,
-    bytestring        >= 0.9,
-    bytestring-lexing >= 0.4,
-    containers        >= 0.4,
-    file-embed        >= 0.0.4.1,
-    filepath          >= 1,
-    iteratee          >= 0.8.8,
-    mtl               >= 2,
-    split             >= 0.1.4,
-    vector            == 0.9.*   ,
-    BiobaseTurner     == 0.2.2.4 ,
-    BiobaseXNA        == 0.6.2.5 ,
-    PrimitiveArray    == 0.2.2.0
+--    bytestring        >= 0.9,
+--    bytestring-lexing >= 0.4,
+--    containers        >= 0.4,
+--    file-embed        >= 0.0.4.1,
+--    filepath          >= 1,
+--    iteratee          >= 0.8.8,
+--    mtl               >= 2,
+--    split             >= 0.1.4,
+    primitive         >= 0.5     ,
+    vector            >= 0.10    ,
+    BiobaseTurner     >= 0.3.0.0 ,
+    BiobaseXNA        >= 0.7     ,
+    PrimitiveArray    >= 0.5
   exposed-modules:
     Biobase.Vienna
-    Biobase.Vienna.Default
-    Biobase.Vienna.Export
-    Biobase.Vienna.Import
-    Biobase.Vienna.ImportPar
+--    Biobase.Vienna.Default
+--    Biobase.Vienna.Export
+--    Biobase.Vienna.Import
+--    Biobase.Vienna.ImportPar
   ghc-options:
     -O2 -funbox-strict-fields
 
 
 
-executable ViennaConverter
-  build-depends:
-    cmdargs == 0.9.*
-  main-is:
-    ViennaConverter.hs
-  ghc-options:
-    -O2 -funbox-strict-fields
+--executable ViennaConverter
+--  build-depends:
+--    cmdargs == 0.9.*
+--  main-is:
+--    ViennaConverter.hs
+--  ghc-options:
+--    -O2 -funbox-strict-fields
 
 
 
