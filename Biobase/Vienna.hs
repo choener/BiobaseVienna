@@ -28,7 +28,13 @@ deriving instance VGM.MVector VU.MVector Deka
 deriving instance VG.Vector VU.Vector Deka
 deriving instance VU.Unbox Deka
 
-viennaModel = emap (\(Energy e) -> Deka $ round $ 100 * e)
+
+
+type Vienna2004 = Turner2004Model Deka
+
+turnerToVienna :: Turner2004 -> Vienna2004
+turnerToVienna = emap (\(Energy e) -> Deka $ round $ 100 * e)
+
 
 {-
 import Data.Array.Repa.Index
